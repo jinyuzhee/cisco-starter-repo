@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {Typography } from "@material-ui/core";
 
 function IPDisplay(props) {
     const [ipAddress, setIpAddress] = useState("");
@@ -15,9 +14,9 @@ function IPDisplay(props) {
 
     return (
         <div>
-          <Typography variant="body1">
+          <p>
             Your public {props.ipAddressType.toUpperCase()} address is: {ipAddress}
-          </Typography>
+          </p>
         </div>
       );
     } 
