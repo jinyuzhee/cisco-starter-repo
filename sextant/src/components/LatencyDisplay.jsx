@@ -5,7 +5,7 @@ function LatencyDisplay() {
   const [latency, setLatency] = useState(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://pylon-server.onrender.com:55455");
+    const ws = new WebSocket("wss://pylon-server.onrender.com");
 
     ws.onmessage = (message) => {
       const packetTimestamp = parseInt(message.data);
