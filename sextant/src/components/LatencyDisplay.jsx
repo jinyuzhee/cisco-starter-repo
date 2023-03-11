@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { w3cwebsocket as WebSocket } from "websocket";
+import io from "socket.io-client";
 
 function LatencyDisplay() {
   const [latency, setLatency] = useState(null);
 
   useEffect(() => {
-    const ws = new WebSocket("wss://pylon-server.onrender.com");
+    const socket = io("http://pylon-server.onrender.com:55455");
 
-    ws.onmessage = (message) => {
-      const packetTimestamp = parseInt(message.data);
+    socket.on("message", (data) => {
+      const packetTimestamp = parseInt(data);
       console.log("packet timestamp:", packetTimestamp);
       const latency = new Date().getTime() - packetTimestamp;
       console.log("Latency:", latency);
       setLatency(latency);
-    };
+    });
 
     return () => {
-      ws.close();
+      socket.close();
     };
   }, []);
 
